@@ -10,13 +10,16 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
+import Table from "./components/Table";
+import { sortData } from "./util";
 
 interface Country {
   name: string;
   value: string;
 }
 
-interface CountryInfo {
+export interface CountryInfo {
+  country: string;
   cases: number;
   recovered: number;
   deaths: number;
@@ -26,6 +29,7 @@ interface CountryInfo {
 }
 
 const CountryInfo_initial = {
+  country: "",
   cases: 0,
   recovered: 0,
   deaths: 0,
@@ -41,6 +45,7 @@ function App() {
   const [country, setCountry] = useState<string>("worldwide");
   const [countryInfo, setCountryInfo] =
     useState<CountryInfo>(CountryInfo_initial);
+  const [tableData, setTableData] = useState<CountryInfo[]>([]);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -51,12 +56,19 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
+
+          // need to sort the data before setting it
+          const sortedData = sortData(data);
+          setTableData(sortedData);
+
           setCountries(countries);
         });
     };
 
     getCountriesData();
   }, []);
+
+  console.log(tableData);
 
   const onCountryChange = async (event: any) => {
     const countryCode = event.target.value;
@@ -134,6 +146,7 @@ function App() {
           <CardContent>
             {/* Table */}
             <h3>Live Cases by Country</h3>
+            <Table countries={tableData}></Table>
             <h3>Worldwide New Cases</h3>
             {/* Graph/Chart */}
           </CardContent>
