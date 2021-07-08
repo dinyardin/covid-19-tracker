@@ -2,6 +2,7 @@ import { FormControl, Select, MenuItem } from "@material-ui/core";
 import { useState, useEffect } from "react";
 
 import "./App.css";
+import InfoBox from "./components/InfoBox";
 
 interface Country {
   name: string;
@@ -36,6 +37,8 @@ function App() {
 
   return (
     <div className="app">
+      {/*  Header  */}
+      {/*  Title + Select input dropdown */}
       <div className="app__header">
         <h1>Covid 19 Tracker</h1>
         <FormControl className="app__dropdown">
@@ -48,10 +51,26 @@ function App() {
         </FormControl>
       </div>
 
-      {/*  Header  */}
-      {/*  Title + Select input dropdown */}
-
       {/* # Info boxes */}
+      <div className="app__stats">
+        <InfoBox
+          title="Coronavirus Cases"
+          cases={212321}
+          total={123232}
+        ></InfoBox>
+
+        <InfoBox
+          title="Coronavirus Cases"
+          cases={212321}
+          total={123232}
+        ></InfoBox>
+
+        <InfoBox
+          title="Coronavirus Cases"
+          cases={212321}
+          total={123232}
+        ></InfoBox>
+      </div>
 
       {/* Table */}
       {/* Graph/Chart */}
