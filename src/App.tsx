@@ -8,6 +8,7 @@ import {
 import { useState, useEffect } from "react";
 
 import "./App.css";
+import Graph from "./components/Graph";
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
@@ -46,6 +47,9 @@ function App() {
   const [countryInfo, setCountryInfo] =
     useState<CountryInfo>(CountryInfo_initial);
   const [tableData, setTableData] = useState<CountryInfo[]>([]);
+  const [casesType, setCasesType] = useState<"cases" | "deaths" | "recovered">(
+    "cases"
+  );
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -123,18 +127,21 @@ function App() {
             title="Coronavirus Cases"
             cases={countryInfo.todayCases}
             total={countryInfo.cases}
+            //onClick={() =>setCasesType("cases")}
           ></InfoBox>
 
           <InfoBox
             title="Recovered"
             cases={countryInfo.todayRecovered}
             total={countryInfo.recovered}
+            //onClick={() => setCasesType("recovered")}
           ></InfoBox>
 
           <InfoBox
             title="Deaths"
             cases={countryInfo.todayDeaths}
             total={countryInfo.deaths}
+            //onClick={() => setCasesType("deaths")
           ></InfoBox>
         </div>
 
@@ -147,8 +154,10 @@ function App() {
             {/* Table */}
             <h3>Live Cases by Country</h3>
             <Table countries={tableData}></Table>
-            <h3>Worldwide New Cases</h3>
+
             {/* Graph/Chart */}
+            <h3>Worldwide New Cases</h3>
+            <Graph type="cases"></Graph>
           </CardContent>
         </Card>
       </div>
