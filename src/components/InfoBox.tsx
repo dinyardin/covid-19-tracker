@@ -1,10 +1,11 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
 import React from "react";
+import "./Infobox.css";
 
 interface Props {
   title: string;
-  cases: number;
-  total: number;
+  cases: string;
+  total: string;
 }
 
 function InfoBox(props: Props) {

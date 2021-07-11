@@ -85,3 +85,7 @@ export const showDataOnMap = (
       </Popup>
     </Circle>
   ));
+
+// formating for stats displayed on inbox component
+export const prettyPrintStat = (stat: number) =>
+  stat ? `+${numeral(stat).format("0.0a")}` : "+0";

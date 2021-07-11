@@ -1,7 +1,7 @@
 import React from "react";
 import { CountryInfo } from "../App";
 import "./Table.css";
-
+import numeral from "numeral";
 interface Props {
   countries: CountryInfo[];
 }
@@ -13,7 +13,7 @@ function Table(props: Props) {
         <tr>
           <td>{country.country}</td>
           <td>
-            <strong>{country.cases}</strong>
+            <strong>{numeral(country.cases).format("0,0")}</strong>
           </td>
         </tr>
       ))}

@@ -12,7 +12,7 @@ import Graph from "./components/Graph";
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
-import { sortData } from "./util";
+import { sortData, prettyPrintStat } from "./util";
 import "leaflet/dist/leaflet.css";
 
 interface Country {
@@ -137,22 +137,22 @@ function App() {
         <div className="app__stats">
           <InfoBox
             title="Coronavirus Cases"
-            cases={countryInfo.todayCases}
-            total={countryInfo.cases}
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={prettyPrintStat(countryInfo.cases)}
             //onClick={() =>setCasesType("cases")}
           ></InfoBox>
 
           <InfoBox
             title="Recovered"
-            cases={countryInfo.todayRecovered}
-            total={countryInfo.recovered}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={prettyPrintStat(countryInfo.recovered)}
             //onClick={() => setCasesType("recovered")}
           ></InfoBox>
 
           <InfoBox
             title="Deaths"
-            cases={countryInfo.todayDeaths}
-            total={countryInfo.deaths}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={prettyPrintStat(countryInfo.deaths)}
             //onClick={() => setCasesType("deaths")
           ></InfoBox>
         </div>
