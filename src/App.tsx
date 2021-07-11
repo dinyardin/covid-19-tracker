@@ -48,7 +48,7 @@ function App() {
   const [countryInfo, setCountryInfo] =
     useState<CountryInfo>(CountryInfo_initial);
   const [tableData, setTableData] = useState<CountryInfo[]>([]);
-  const [type, setType] = useState<"cases" | "deaths" | "recovered">("deaths");
+  const [type, setType] = useState<"cases" | "deaths" | "recovered">("cases");
   const [mapCenter, setMapCenter] = useState<any>({
     lat: 34.80746,
     lng: -40.4796,
@@ -139,21 +139,21 @@ function App() {
             title="Coronavirus Cases"
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={prettyPrintStat(countryInfo.cases)}
-            //onClick={() =>setCasesType("cases")}
+            onClick={() => setType("cases")}
           ></InfoBox>
 
           <InfoBox
             title="Recovered"
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={prettyPrintStat(countryInfo.recovered)}
-            //onClick={() => setCasesType("recovered")}
+            onClick={() => setType("recovered")}
           ></InfoBox>
 
           <InfoBox
             title="Deaths"
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={prettyPrintStat(countryInfo.deaths)}
-            //onClick={() => setCasesType("deaths")
+            onClick={() => setType("deaths")}
           ></InfoBox>
         </div>
 

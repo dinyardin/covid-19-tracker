@@ -6,11 +6,12 @@ interface Props {
   title: string;
   cases: string;
   total: string;
+  onClick: () => void;
 }
 
 function InfoBox(props: Props) {
   return (
-    <Card className="infoBox">
+    <Card onClick={props.onClick} className="infoBox">
       <CardContent>
         {/* Titke */}
         <Typography className="infoBox__tile" color="textSecondary">
