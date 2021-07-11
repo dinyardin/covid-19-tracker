@@ -13,6 +13,7 @@ import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
 import { sortData } from "./util";
+import "leaflet/dist/leaflet.css";
 
 interface Country {
   name: string;
@@ -50,6 +51,11 @@ function App() {
   const [casesType, setCasesType] = useState<"cases" | "deaths" | "recovered">(
     "cases"
   );
+  const [mapCenter, setMapCenter] = useState<any>({
+    lat: 43.6532,
+    lng: -79.3832,
+  });
+  const [mapZoom, setMapZoom] = useState<number>(3);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -146,7 +152,7 @@ function App() {
         </div>
 
         {/* Map */}
-        <Map></Map>
+        <Map center={mapCenter} zoom={mapZoom}></Map>
       </div>
       <div className="app__right">
         <Card>
