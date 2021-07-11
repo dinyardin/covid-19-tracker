@@ -48,14 +48,13 @@ function App() {
   const [countryInfo, setCountryInfo] =
     useState<CountryInfo>(CountryInfo_initial);
   const [tableData, setTableData] = useState<CountryInfo[]>([]);
-  const [casesType, setCasesType] = useState<"cases" | "deaths" | "recovered">(
-    "cases"
-  );
+  const [type, setType] = useState<"cases" | "deaths" | "recovered">("deaths");
   const [mapCenter, setMapCenter] = useState<any>({
-    lat: 43.6532,
-    lng: -79.3832,
+    lat: 34.80746,
+    lng: -40.4796,
   });
   const [mapZoom, setMapZoom] = useState<number>(3);
+  const [mapCountries, setMapCountries] = useState<any>([]);
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -72,6 +71,9 @@ function App() {
           setTableData(sortedData);
 
           setCountries(countries);
+
+          setMapCountries(data);
+          console.log("===========>", data);
         });
     };
 
@@ -94,6 +96,10 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
+
+        // focus the map onto the country selected
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(5);
       });
   };
 
@@ -152,7 +158,12 @@ function App() {
         </div>
 
         {/* Map */}
-        <Map center={mapCenter} zoom={mapZoom}></Map>
+        <Map
+          center={mapCenter}
+          zoom={mapZoom}
+          countries={mapCountries}
+          type={type}
+        ></Map>
       </div>
       <div className="app__right">
         <Card>
