@@ -42,13 +42,13 @@ const casesTypeColors = {
     hex: "#7dd71d",
     //rgb: "rgb(125, 215, 29)",
     //half_op: "rgba(125, 215, 29, 0.5)",
-    multiplier: 500,
+    multiplier: 250,
   },
   deaths: {
-    hex: "#fb4443",
+    hex: "#C0C0C0",
     //rgb: "rgb(251, 68, 67)",
     //half_op: "rgba(251, 68, 67, 0.5)",
-    multiplier: 2000,
+    multiplier: 1000,
   },
 };
 
@@ -57,8 +57,9 @@ export const showDataOnMap = (
   data: any,
   type: "cases" | "deaths" | "recovered" = "cases"
 ) =>
-  data.map((country: any) => (
+  data.map((country: any, index: number) => (
     <Circle
+      key={index}
       center={[country.countryInfo.lat, country.countryInfo.long]}
       color={casesTypeColors[type].hex}
       fillColor={casesTypeColors[type].hex}
@@ -88,4 +89,4 @@ export const showDataOnMap = (
 
 // formating for stats displayed on inbox component
 export const prettyPrintStat = (stat: number) =>
-  stat ? `+${numeral(stat).format("0.0a")}` : "+0";
+  stat ? ` ${numeral(stat).format("0.0a")}` : " 0";

@@ -62,10 +62,11 @@ const options = {
 
 interface Type {
   type: "cases" | "deaths" | "recovered";
+  className: string;
 }
 
 function Graph(props: Type) {
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any>(data_initial);
   const url: string =
     "https://disease.sh/v3/covid-19/historical/all?lastdays=120";
 
@@ -85,14 +86,13 @@ function Graph(props: Type) {
   }, [props.type]);
 
   return (
-    <div>
+    <div className={props.className}>
       {data?.length > 0 && (
         <Line
-          type="line"
+          type="segment"
           data={{
             datasets: [
               {
-                label: "Cases per Day",
                 backgroundColor: "rgba(204, 16, 52, 0.5)",
                 borderColor: "#CC1034",
                 data: data,

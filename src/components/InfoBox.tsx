@@ -7,23 +7,45 @@ interface Props {
   cases: string;
   total: string;
   onClick: () => void;
+  active: boolean;
+  isRed?: boolean;
+  isGrey?: boolean;
+  isLoading: boolean;
 }
 
 function InfoBox(props: Props) {
   return (
-    <Card onClick={props.onClick} className="infoBox">
+    <Card
+      onClick={props.onClick}
+      className={`infoBox ${props.active && "infoBox--selected"} ${
+        props.isRed && "infoBox--red"
+      } ${props.isGrey && "infoBox--grey"}`}
+    >
       <CardContent>
-        {/* Titke */}
+        {/* Title */}
         <Typography className="infoBox__tile" color="textSecondary">
           {props.title}
         </Typography>
 
         {/* Number of Cases */}
-        <h2 className="infoBox__cases">{props.cases}</h2>
+        <h2
+          className={`infoBox__cases ${
+            !props.isRed && "infoBox__cases--green"
+          } ${props.isGrey && "infoBox__cases--grey"}`}
+        >
+          {" "}
+          Today:
+          {props.isLoading ? (
+            <i className="fa fa-cog fa-spin fa-fw" />
+          ) : (
+            props.cases
+          )}
+        </h2>
 
         {/* Total */}
         <Typography className="infoBox__total" color="textSecondary">
-          {props.total} Total
+          Total Cases:
+          {props.total}
         </Typography>
       </CardContent>
     </Card>

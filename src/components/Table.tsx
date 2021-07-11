@@ -9,14 +9,18 @@ interface Props {
 function Table(props: Props) {
   return (
     <div className="table">
-      {props.countries.map((country) => (
-        <tr>
-          <td>{country.country}</td>
-          <td>
-            <strong>{numeral(country.cases).format("0,0")}</strong>
-          </td>
-        </tr>
-      ))}
+      <table>
+        <tbody className="table">
+          {props.countries.map((country, index) => (
+            <tr key={index}>
+              <td>{country.country}</td>
+              <td>
+                <strong>{numeral(country.cases).format("0,0")}</strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
